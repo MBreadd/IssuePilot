@@ -198,8 +198,8 @@ def draft_node(state: IssueState):
 
 builder = StateGraph(IssueState)
 
-
 # Nodos
+
 builder.add_node(
     "analyze",
     analyze_node
@@ -225,10 +225,15 @@ builder.add_node(
     other_node
 )
 
+builder.add_node(
+    "draft",
+    draft_node
+)
 
-# ---------------------------------
-# 6. Edges
-# ---------------------------------
+
+# -----------------------------
+# Edges
+# -----------------------------
 
 builder.add_edge(
     START,
@@ -274,8 +279,8 @@ builder.add_edge(
 )
 
 
-# ---------------------------------
-# 7. Compilar
-# ---------------------------------
+# -----------------------------
+# Compilar
+# -----------------------------
 
 issue_graph = builder.compile()
