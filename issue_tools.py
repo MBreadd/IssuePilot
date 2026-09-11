@@ -48,7 +48,7 @@ def create_github_issue(
     title: str,
     body: str,
 ) -> str:
-    """Create a new issue in the configured GitHub repository."""
+    """Create a GitHub Issue in the configured repository."""
 
     token = os.getenv("GITHUB_TOKEN")
     owner = os.getenv("GITHUB_OWNER")
@@ -78,6 +78,7 @@ def create_github_issue(
         "Accept": "application/vnd.github+json",
         "Authorization": f"Bearer {token}",
         "X-GitHub-Api-Version": "2026-03-10",
+        "User-Agent": "IssuePilot",
     }
 
     payload = {

@@ -40,11 +40,6 @@ if "issue_draft" in result:
     print("\n--- GitHub Issue Draft ---")
     print(result["issue_draft"])
 
-if "issue_draft" in result:
-
-    print("\n--- GitHub Issue Draft ---")
-    print(result["issue_draft"])
-
     choice = input(
         "\nCreate this issue on GitHub? (y/n): "
     ).strip().lower()
