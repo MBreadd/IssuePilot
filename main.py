@@ -1,5 +1,5 @@
 from graph import issue_graph
-
+from issue_tools import create_github_issue
 
 print("=== IssuePilot ===")
 print("Describe the software issue:\n")
@@ -39,3 +39,27 @@ if "issue_draft" in result:
 
     print("\n--- GitHub Issue Draft ---")
     print(result["issue_draft"])
+
+if "issue_draft" in result:
+
+    print("\n--- GitHub Issue Draft ---")
+    print(result["issue_draft"])
+
+    choice = input(
+        "\nCreate this issue on GitHub? (y/n): "
+    ).strip().lower()
+
+    if choice == "y":
+
+        issue_url = create_github_issue.invoke(
+            {
+                "title": result["summary"],
+                "body": result["issue_draft"],
+            }
+        )
+
+        print("\nGitHub Issue created:")
+        print(issue_url)
+
+    else:
+        print("\nGitHub Issue was not created.")
