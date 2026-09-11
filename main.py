@@ -34,3 +34,8 @@ for task in result["checklist"]:
 
 print("\n--- Specialized Analysis ---")
 print(result["response"])
+
+if "issue_draft" in result:
+
+    print("\n--- GitHub Issue Draft ---")
+    print(result["issue_draft"])

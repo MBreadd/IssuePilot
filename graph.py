@@ -4,6 +4,7 @@ from langgraph.graph import StateGraph, START, END
 
 from analyzer import analyze_issue, generate_response
 
+from issue_tools import build_github_issue_draft
 
 # ---------------------------------
 # 1. Estado compartido del grafo
@@ -174,6 +175,22 @@ def other_node(state: IssueState):
         )
     }
 
+def draft_node(state: IssueState):
+
+    draft = build_github_issue_draft.invoke(
+        {
+            "summary": state["summary"],
+            "issue_type": state["type"],
+            "priority": state["priority"],
+            "area": state["area"],
+            "checklist": state["checklist"],
+            "specialized_analysis": state["response"],
+        }
+    )
+
+    return {
+        "issue_draft": draft
+    }
 
 # ---------------------------------
 # 5. Construir grafo
@@ -233,11 +250,16 @@ builder.add_conditional_edges(
 
 builder.add_edge(
     "bug",
-    END
+    "draft"
 )
 
 builder.add_edge(
     "feature",
+    "draft"
+)
+
+builder.add_edge(
+    "draft",
     END
 )
 
